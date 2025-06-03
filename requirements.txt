@@ -5,7 +5,7 @@
 -e git+https://github.com/huggingface/transformers.git#egg=transformers[torch]
 
 # 2. Other core dependencies
-datasets==3.18.0
+datasets==3.6.0
 huggingface-hub==0.32.3
 tokenizers==0.21.1
 safetensors==0.3.3

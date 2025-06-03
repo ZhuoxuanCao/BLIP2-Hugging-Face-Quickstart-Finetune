@@ -14,7 +14,7 @@ conda activate blip2_env
 bash
 复制
 编辑
-pip install torch==2.7.0+cu118 torchvision==0.22.0+cu118 torchaudio==2.7.0+cu118 --index-url https://download.pytorch.org/whl/cu118
+pip install torch==2.6.0+cu118 torchvision==0.22.0+cu118 torchaudio==2.7.0+cu118 --index-url https://download.pytorch.org/whl/cu118
 如需其它CUDA版本，详见：https://pytorch.org/get-started/locally/
 
 3. 安装源码版transformers与其余依赖
