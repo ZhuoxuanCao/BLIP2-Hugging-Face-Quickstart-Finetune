@@ -2,7 +2,7 @@
 # See README for installation instructions (it is recommended to manually install the GPU version of torch first)
 
 # 1. Source code transformers
--e git+https://github.com/huggingface/transformers.git#egg=transformers[torch]
+# -e git+https://github.com/huggingface/transformers.git#egg=transformers[torch]
 
 # 2. Other core dependencies
 datasets==3.6.0
