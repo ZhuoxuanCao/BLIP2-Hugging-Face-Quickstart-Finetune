@@ -8,6 +8,9 @@
 #SBATCH --mem=24G                            # 24GB内存（大模型建议充裕）
 #SBATCH --ntasks=1
 #SBATCH --time=23:30:00                      # 最多23小时30分钟（方便提前收尾）
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=recco822@gmail.com
+
 
 # 如需加载conda模块（根据你的环境决定是否加）
 # module load miniconda3/4.10.3/gcc-13.2.0
