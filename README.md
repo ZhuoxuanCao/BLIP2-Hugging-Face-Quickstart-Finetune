@@ -8,7 +8,7 @@ Beginner-Friendly BLIP-2 Fine-Tuning & Inference Toolkit for Image Captioning (H
 **BLIP-2** (Bootstrapped Language-Image Pretraining) is a powerful vision-language model introduced by Salesforce Research. It bridges vision encoders and language models through a lightweight **Querying Transformer (Q-Former)**, enabling efficient image-to-text understanding and generation. BLIP-2 achieves state-of-the-art results in a wide range of V+L tasks such as image captioning, VQA, and more.
 
 <div align="center">
-  <img src="./img/blip2_architecture.png" alt="BLIP-2 Architecture" width="700"/>
+  <img src="./img/1_48hOmexceHGl5drITL6-AQ.jpg" alt="BLIP-2 Architecture" width="700"/>
   <br />
   <em>Figure: BLIP-2 model architecture (Image credit: Salesforce Research)</em>
 </div>
