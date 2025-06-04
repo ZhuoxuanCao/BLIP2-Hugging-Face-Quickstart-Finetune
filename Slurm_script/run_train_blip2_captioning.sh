@@ -19,7 +19,7 @@
 # nvidia-smi
 
 # 进入你的代码目录
-cd /gpfs/workdir/caozh/BLIP2_HF_V2/
+cd /gpfs/workdir/caozh/BLIP2-Hugging-Face-Quickstart-Finetune/
 
 # 运行微调脚本
 python finetune_blip2_caption.py

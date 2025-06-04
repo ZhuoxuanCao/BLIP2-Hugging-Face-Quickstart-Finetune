@@ -19,7 +19,7 @@
 # nvidia-smi
 
 # 进入你的项目目录
-cd /gpfs/workdir/caozh/BLIP2_HF_V2/
+cd /gpfs/workdir/caozh/BLIP2-Hugging-Face-Quickstart-Finetune/
 
 # 运行模型加载测试脚本
 python test_blip2_model_load.py

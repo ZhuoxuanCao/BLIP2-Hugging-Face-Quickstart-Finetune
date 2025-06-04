@@ -19,7 +19,7 @@
 # nvidia-smi
 
 # 进入项目代码目录（确保在 main.py 所在目录）
-cd /gpfs/workdir/caozh/BLIP2_HF_V2/
+cd /gpfs/workdir/caozh/BLIP2-Hugging-Face-Quickstart-Finetune/
 
 # 运行你的主程序
 python main.py
