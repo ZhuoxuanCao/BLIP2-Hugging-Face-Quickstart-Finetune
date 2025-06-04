@@ -18,6 +18,9 @@
 # 检查 CUDA 版本（可选）
 # nvidia-smi
 
+# 进入你的代码目录
+cd /gpfs/workdir/caozh/BLIP2-Hugging-Face-Quickstart-Finetune/
+
 # 运行你的 CUDA 测试脚本
 python test_requirements.py
 
