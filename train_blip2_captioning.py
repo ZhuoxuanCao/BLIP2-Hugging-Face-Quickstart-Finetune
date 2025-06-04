@@ -3,15 +3,22 @@ import json
 import torch
 from PIL import Image
 from datasets import Dataset
-from transformers import BlipProcessor, Blip2ForConditionalGeneration, TrainingArguments, Trainer
+from transformers import (
+    BlipProcessor,          # 保持你原来使用的 Processor
+    Blip2ForConditionalGeneration,
+    TrainingArguments,
+    Trainer,
+)
 from sklearn.model_selection import train_test_split
+
 
 class CustomTrainer(Trainer):
     def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
-        # 兼容 HF 新 API 多余参数
+        # 兼容 HF 新 API 可能多出的参数
         if "num_items_in_batch" in inputs:
             inputs.pop("num_items_in_batch")
         return super().compute_loss(model, inputs, return_outputs=return_outputs)
+
 
 def split_json(data_path, train_path, val_path):
     with open(data_path, 'r', encoding='utf-8') as f:
@@ -23,6 +30,7 @@ def split_json(data_path, train_path, val_path):
         json.dump(val_list, f, ensure_ascii=False, indent=2)
     print(f"[数据集划分] 已生成 {train_path} 和 {val_path}")
 
+
 def json_to_jsonl(json_path, jsonl_path):
     with open(json_path, 'r', encoding='utf-8') as fin, \
          open(jsonl_path, 'w', encoding='utf-8') as fout:
@@ -30,6 +38,7 @@ def json_to_jsonl(json_path, jsonl_path):
         for item in data:
             fout.write(json.dumps(item, ensure_ascii=False) + '\n')
     print(f"[格式转换] 已生成 {jsonl_path}")
+
 
 def preprocess_function(example, processor):
     image = Image.open(example["image"]).convert("RGB")
@@ -54,6 +63,7 @@ def preprocess_function(example, processor):
     inputs["labels"] = labels.squeeze(0)
     return inputs
 
+
 def main():
     # ===== 1. 数据集划分：80% 训练，20% 验证 =====
     if not (os.path.exists('train_split.json') and os.path.exists('val_split.json')):
@@ -76,10 +86,20 @@ def main():
     train_dataset = Dataset.from_list(train_list)
     eval_dataset  = Dataset.from_list(val_list)
 
-    # ===== 4. 加载模型和 Processor =====
-    model_name = "Salesforce/blip2-flan-t5-xl"  # 如有本地路径，也可替换
-    processor = BlipProcessor.from_pretrained(model_name)
-    model = Blip2ForConditionalGeneration.from_pretrained(model_name)
+    # ============================================================
+    # 4. 加载模型和 Processor
+    #    【保留两种方案：① 在线加载（已注释）② 本地 snapshot 路径加载（默认启用）】
+    # ============================================================
+
+    # ---------- 方案 ①：在线加载（服务器若无法联网将报错，保留作参考） ----------
+    # model_name = "Salesforce/blip2-flan-t5-xl"
+    # processor = BlipProcessor.from_pretrained(model_name)
+    # model     = Blip2ForConditionalGeneration.from_pretrained(model_name)
+
+    # ---------- 方案 ②：本地 snapshot 路径加载（推荐 / 服务器离线必用） ----------
+    local_model_path = "/gpfs/workdir/caozh/models--Salesforce--blip2-flan-t5-xl/snapshots/0eb0d3b46c14c1f8c7680bca2693baafdb90bb28"
+    processor = BlipProcessor.from_pretrained(local_model_path)
+    model     = Blip2ForConditionalGeneration.from_pretrained(local_model_path)
 
     # ===== 5. 预处理数据 =====
     train_dataset = train_dataset.map(lambda ex: preprocess_function(ex, processor))
@@ -126,8 +146,10 @@ def main():
     print("tensorboard --logdir ./blip2_captioning/tensorboard")
     print("浏览器访问 http://localhost:6006")
 
+
 if __name__ == "__main__":
     main()
+
 
 
 
